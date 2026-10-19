@@ -1,8 +1,9 @@
-{% extends "index.html" %}<!---->
+{#<!-- prettier-ignore -->#}
+{% extends "index.html" %}
 {% block main %}
 <article>
   <header class="mb-16">
-    <h1 class="!my-0 pb-2.5">{{ page.title }}</h1>
+    <h1 class="my-0! pb-2.5">{{ page.title }}</h1>
   </header>
 
   <section>{{ page.content | safe }}</section>

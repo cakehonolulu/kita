@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    "*.html": "jinja-html",
+    "*.css": "tailwindcss"
+  },
+  "[jinja-html]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "tailwindCSS.includeLanguages": {
+    "jinja-html": "html"
+  }
+}

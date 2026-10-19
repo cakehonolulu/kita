@@ -1,0 +1,5 @@
+{
+  "printWidth": 100,
+  "sortTailwindcss": true,
+  "ignorePatterns": ["static/main.css", "templates/_components/__social_icon_url.html"]
+}

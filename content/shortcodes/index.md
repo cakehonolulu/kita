@@ -1,20 +1,22 @@
 +++
-title = "Shortcodes"
+title = "Components"
 date = "2022-10-20"
-description = "The Kita theme shortcodes."
+description = "The Kita theme components."
 [taxonomies]
 tags = ["markdown", "css", "html"]
 [extra]
 mermaid = true
 +++
 
-The Kita theme providers multiple shortcodes.
+The Kita theme provides multiple Tera components.
 
-Never heard of shortcodes? See [Zola documentation](https://www.getzola.org/documentation/content/shortcodes/) for more information.
+Zola 0.23 replaced shortcodes with components. See [Zola documentation](https://www.getzola.org/documentation/content/overview/#migrating-from-shortcodes) for more information.
 
 ## Mermaid
 
 To use Mermaid in your page, you have to set `extra.mermaid = true` in the frontmatter of page.
+
+{% raw %}
 
 ```markdown
 +++
@@ -25,10 +27,14 @@ mermaid = true
 +++
 ```
 
-Then you can use the `mermaid()` shortcodes like:
+{% endraw %}
+
+Then you can use the `mermaid` component like:
+
+{% raw %}
 
 ```markdown
-{%/* mermaid() */%}
+{% <mermaid> %}
 
 graph TD;
 A-->B;
@@ -36,12 +42,14 @@ A-->C;
 B-->D;
 C-->D;
 
-{%/* end */%}
+{% </mermaid> %}
 ```
+
+{% endraw %}
 
 This will be rendered as:
 
-{% mermaid() %}
+{% <mermaid> %}
 
 graph TD;
 A-->B;
@@ -49,14 +57,16 @@ A-->C;
 B-->D;
 C-->D;
 
-{% end %}
+{% </mermaid> %}
 
-In addition, you can use code block inside `mermaid()` shortcodes and the code block will be ignored.
+In addition, you can use code block inside `mermaid` component and the code block will be ignored.
 
 The code block prevents formatter from breaking mermaid's formatting.
 
+{% raw %}
+
 ````markdown
-{%/* mermaid() */%}
+{% <mermaid> %}
 
 ```mermaid
 sequenceDiagram
@@ -72,12 +82,14 @@ sequenceDiagram
     Bob-->>John: Jolly good!
 ```
 
-{%/* end */%}
+{% </mermaid> %}
 ````
+
+{% endraw %}
 
 This will be rendered as:
 
-{% mermaid() %}
+{% <mermaid> %}
 
 ```mermaid
 sequenceDiagram
@@ -93,78 +105,106 @@ sequenceDiagram
     Bob-->>John: Jolly good!
 ```
 
-{% end %}
+{% </mermaid> %}
 
 ## Admonition
 
-The `admonition()` shortcode displays a banner to help you put notice in your page.
+The `admonition` component displays a banner to help you put notice in your page.
 
-You can use the `admonition()` shortcode like:
+This is another way to write a GitHub-style alert, but it supports custom titles.
+
+You can use the `admonition` component like:
+
+{% raw %}
 
 ```markdown
-{%/* admonition(type="tip", title="tip") */%}
-The `tip` admonition.
-{%/* end */%}
+{% <admonition type="note" title="note"> %}
+The `note` admonition.
+{% </admonition> %}
 ```
 
-The admonition shortcode has 12 different types:
+{% endraw %}
 
-{% admonition(type="note", title="note") %}
+{% <admonition type="note" title="note"> %}
 The `note` admonition.
-{% end %}
+{% </admonition> %}
 
-{% admonition(type="abstract", title="abstract") %}
-The `abstract` admonition.
-{% end %}
-
-{% admonition(type="info", title="info") %}
-The `info` admonition.
-{% end %}
-
-{% admonition(type="tip", title="tip") %}
+{% <admonition type="tip" title="tip"> %}
 The `tip` admonition.
-{% end %}
+{% </admonition> %}
 
-{% admonition(type="success", title="success") %}
-The `success` admonition.
-{% end %}
+{% <admonition type="important" title="important"> %}
+The `important` admonition.
+{% </admonition> %}
 
-{% admonition(type="question", title="question") %}
-The `question` admonition.
-{% end %}
-
-{% admonition(type="warning", title="warning") %}
+{% <admonition type="warning" title="warning"> %}
 The `warning` admonition.
-{% end %}
+{% </admonition> %}
 
-{% admonition(type="failure", title="failure") %}
-The `failure` admonition.
-{% end %}
-
-{% admonition(type="abstract", title="danger") %}
-The `danger` admonition.
-{% end %}
-
-{% admonition(type="bug", title="bug") %}
-The `bug` admonition.
-{% end %}
-
-{% admonition(type="example", title="example") %}
-The `example` admonition.
-{% end %}
-
-{% admonition(type="quote", title="quote") %}
-The `quote` admonition.
-{% end %}
+{% <admonition type="caution" title="caution"> %}
+The `caution` admonition.
+{% </admonition> %}
 
 ## Gallery
 
-The `gallery()` shortcode is very simple html-only clickable picture gallery that displays all images from the page assets.
+The `gallery` component is very simple html-only clickable picture gallery that displays all images from the page assets.
 
 It's from [Zola documentation](https://www.getzola.org/documentation/content/image-processing/)
 
+{% raw %}
+
 ```markdown
-{{/* gallery() */}}
+{{<gallery />}}
 ```
 
-{{ gallery() }}
+{% endraw %}
+
+{{<gallery />}}
+
+## Inline SVG
+
+The `inline_svg` component is used to embed SVG images directly into a webpage, rather than including them via an `<img>` tag.
+
+You can use the `inline_svg` component like:
+
+{% raw %}
+
+```markdown
+{% <inline_svg> %}
+![Van de Graaf canon](Van_de_Graaf_canon_in_book_design.svg)
+{% </inline_svg> %}
+```
+
+{% endraw %}
+
+{% <inline_svg> %}
+![Van de Graaf canon](Van_de_Graaf_canon_in_book_design.svg)
+{% </inline_svg> %}
+
+If you don't want to display a caption below the image, you can set the Markdown image `alt` text to an empty string, `Inline SVG`, `inline-svg`, or `inline_svg`.
+
+{% raw %}
+
+```markdown
+{% <inline_svg> %}
+![](Van_de_Graaf_canon_in_book_design.svg)
+{% </inline_svg> %}
+
+{% <inline_svg> %}
+![Inline SVG](Van_de_Graaf_canon_in_book_design.svg)
+{% </inline_svg> %}
+
+{% <inline_svg> %}
+![inline-svg](Van_de_Graaf_canon_in_book_design.svg)
+{% </inline_svg> %}
+
+{% <inline_svg> %}
+![inline_svg](Van_de_Graaf_canon_in_book_design.svg)
+{% </inline_svg> %}
+```
+
+{% endraw %}
+
+{% <inline_svg> %}
+![Inline SVG](Van_de_Graaf_canon_in_book_design.svg)
+{% </inline_svg> %}
